@@ -81,3 +81,9 @@ in these cases:
 - `updated` isn't a date
 - after the drops, there is no active model for a provider or video mode that the
   bundled file has
+
+## Publishing a change
+
+Edit `models.json` here, run `cargo test --lib generate::catalogue`, and copy the same file to
+`main` of the public repo `dimitritholen/letmecook-models`. Raise `updated` with every change: the app
+ignores a published file older than the copy it ships.
