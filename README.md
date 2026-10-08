@@ -10,7 +10,7 @@ and then at most once a day, and keeps the last good one under its config dir
 
 | Field | Meaning |
 | --- | --- |
-| `schema` | `1`. A file with a higher schema is refused, and the app keeps the catalogue it has. |
+| `schema` | `2`. The app reads this schema and every older one; a file with a higher schema is refused, and the app keeps the catalogue it has. Raise it when an entry needs a field older app versions don't know (2 added `resolution_values` and `aspect_modes`), so those versions keep their own list instead of sending requests they can't build. |
 | `updated` | The day the file last changed, `YYYY-MM-DD`. A fetched file older than the bundled one is ignored. |
 | `image.providers` | The image providers. The first one is the default. |
 | `video.models` | The video models. |
@@ -42,15 +42,15 @@ and then at most once a day, and keeps the last good one under its config dir
 
 | Field | Meaning |
 | --- | --- |
-| `id`, `name`, `family` | Its catalogue id (kept in Settings and in a plan), what the plan card calls it, and its model line (`seedance`, `wan`). |
+| `id`, `name`, `family` | Its catalogue id (kept in Settings and in a plan), what the plan card calls it, and its model line (`seedance`, `wan`, `minimax`). |
 | `provider` | `fal`. It is the only provider with a video client. |
 | `image_to_video`, `text_to_video`, `start_end` | The fal endpoint for each mode it can do, or `null`. |
 | `rank` | One rank per mode it has an endpoint for, and none for the other modes. 1 is the best. |
 | `seconds` | `[shortest, longest]`, between 1 and 60. |
 | `auto_seconds` | Whether it can choose its own length. |
 | `resolutions` | Some of `480p`, `720p`, `1080p`. |
-| `aspects` | `auto` first, then some of `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16`. |
-| `inputs` | What the model calls each input field: `image`, `end_image` (needed for `start_end`), `duration`, `resolution`, `aspect`, `audio` (or `null` without sound), and `duration_as` (`text` sends `"5"`, `number` sends `5`). `auto_aspect` is how the model spells "take the shape from the image". Field names are `[a-z_]`, at most 40 characters. |
+| `aspects` | `auto` first, then some of `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16`. Modes left out of `inputs.aspect_modes` offer `auto` only. |
+| `inputs` | What the model calls each input field: `image`, `end_image` (needed for `start_end`), `duration`, `resolution`, `aspect`, `audio` (or `null` without sound), and `duration_as` (`text` sends `"5"`, `number` sends `5`). `auto_aspect` is how the model spells "take the shape from the image"; `null` or left out sends no aspect for "auto". Field names are `[a-z_]`, at most 40 characters. Two optional fields cover models that spell things their own way. `resolution_values` maps each of the model's `resolutions` to what the model calls it (`{"480p": "480P"}`); it needs an entry for every resolution, each a word of letters and digits up to 16 characters, and without it the resolution is sent as is. `aspect_modes` lists the modes (`image_to_video`, `text_to_video`, `start_end`) whose request has the `aspect` field; in the other modes the image sets the shape, no aspect is sent, and only `auto` can be asked for. Left out, every mode has it. |
 | `billing` | Used for the estimate when fal's pricing call gives nothing usable. `{"tokens": {"usd_per_1k": n}}`, or `{"per_second": [["480p", n], ...]}` with one price for each resolution. |
 | `price`, `wait` | What the plan card says about cost and time. |
 | `status` | `active` or `retired`. |
@@ -77,7 +77,7 @@ in these cases:
 
 - the file isn't JSON
 - the file is larger than 256 KB
-- the schema isn't 1
+- the schema is higher than the app reads
 - `updated` isn't a date
 - after the drops, there is no active model for a provider or video mode that the
   bundled file has

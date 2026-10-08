@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "updated": "2026-10-08",
   "image": {
     "providers": [
@@ -44,6 +44,15 @@
             "price": "$0.041 to $0.10 per image, by size",
             "seed": false,
             "rank": { "edit": 1 },
+            "status": "active"
+          },
+          {
+            "id": "bytedance-seed/seedream-4.5",
+            "label": "Seedream 4.5",
+            "family": "seedream",
+            "price": "$0.04 per image",
+            "seed": false,
+            "rank": { "edit": 2 },
             "status": "active"
           }
         ],
@@ -90,6 +99,15 @@
             "price": "$0.04 per image",
             "seed": true,
             "rank": { "edit": 1 },
+            "status": "active"
+          },
+          {
+            "id": "fal-ai/flux-pro/kontext/max",
+            "label": "FLUX.1 Kontext [max]",
+            "family": "flux",
+            "price": "$0.08 per image",
+            "seed": true,
+            "rank": { "edit": 2 },
             "status": "active"
           }
         ],
@@ -182,6 +200,36 @@
         "billing": { "per_second": [["480p", 0.05], ["720p", 0.1], ["1080p", 0.2]] },
         "price": "$0.05 a second at 480p, $0.10 at 720p, $0.20 at 1080p",
         "wait": "about 1 to 4 minutes"
+      },
+      {
+        "id": "minimax/h3",
+        "name": "MiniMax H3",
+        "family": "minimax",
+        "provider": "fal",
+        "status": "active",
+        "image_to_video": "minimax/h3/image-to-video",
+        "text_to_video": "minimax/h3/text-to-video",
+        "start_end": "minimax/h3/image-to-video",
+        "rank": { "image_to_video": 4, "text_to_video": 3, "start_end": 4 },
+        "seconds": [5, 15],
+        "auto_seconds": false,
+        "resolutions": ["480p", "720p", "1080p"],
+        "aspects": ["auto", "21:9", "16:9", "4:3", "1:1", "3:4", "9:16"],
+        "inputs": {
+          "image": "image_url",
+          "end_image": "end_image_url",
+          "duration": "duration",
+          "duration_as": "number",
+          "resolution": "resolution",
+          "resolution_values": { "480p": "480P", "720p": "768P", "1080p": "2K" },
+          "aspect": "aspect_ratio",
+          "aspect_modes": ["text_to_video"],
+          "auto_aspect": null,
+          "audio": null
+        },
+        "billing": { "per_second": [["480p", 0.05], ["720p", 0.06], ["1080p", 0.13]] },
+        "price": "$0.05 a second at 480p, $0.06 at 720p, $0.13 at 1080p",
+        "wait": "a few minutes"
       }
     ]
   }
