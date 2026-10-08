@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "updated": "2026-10-08",
+  "image": {
+    "providers": [
+      {
+        "id": "openrouter",
+        "name": "OpenRouter",
+        "key_page": "https://openrouter.ai/settings/keys",
+        "models": [
+          {
+            "id": "black-forest-labs/flux-3-image",
+            "label": "FLUX.3 Image",
+            "family": "flux",
+            "price": "$0.041 to $0.10 per image, by size",
+            "seed": false,
+            "rank": { "image": 1 },
+            "status": "active"
+          },
+          {
+            "id": "bytedance-seed/seedream-5-0-flash",
+            "label": "Seedream 5.0 Flash",
+            "family": "seedream",
+            "price": "$0.018 per image",
+            "seed": true,
+            "rank": { "image": 2 },
+            "status": "active"
+          },
+          {
+            "id": "recraft/recraft-v4.1-flash",
+            "label": "Recraft V4.1 Flash",
+            "family": "recraft",
+            "price": "$0.007 per image",
+            "seed": false,
+            "rank": { "image": 3 },
+            "status": "active"
+          }
+        ],
+        "edit_models": [
+          {
+            "id": "black-forest-labs/flux-3-image",
+            "label": "FLUX.3 Image",
+            "family": "flux",
+            "price": "$0.041 to $0.10 per image, by size",
+            "seed": false,
+            "rank": { "edit": 1 },
+            "status": "active"
+          }
+        ],
+        "edit_result": "at about 1 megapixel, in the nearest of five preset shapes"
+      },
+      {
+        "id": "fal",
+        "name": "fal.ai",
+        "key_page": "https://fal.ai/dashboard/keys",
+        "models": [
+          {
+            "id": "fal-ai/flux-pro/v1.1",
+            "label": "FLUX1.1 [pro]",
+            "family": "flux",
+            "price": "$0.04 per megapixel",
+            "seed": true,
+            "rank": { "image": 1 },
+            "status": "active"
+          },
+          {
+            "id": "fal-ai/flux/dev",
+            "label": "FLUX.1 [dev]",
+            "family": "flux",
+            "price": "$0.025 per megapixel",
+            "seed": true,
+            "rank": { "image": 2 },
+            "status": "active"
+          },
+          {
+            "id": "fal-ai/flux/schnell",
+            "label": "FLUX.1 [schnell]",
+            "family": "flux",
+            "price": "$0.003 per megapixel",
+            "seed": true,
+            "rank": { "image": 3 },
+            "status": "active"
+          }
+        ],
+        "edit_models": [
+          {
+            "id": "fal-ai/flux-pro/kontext",
+            "label": "FLUX.1 Kontext [pro]",
+            "family": "flux",
+            "price": "$0.04 per image",
+            "seed": true,
+            "rank": { "edit": 1 },
+            "status": "active"
+          }
+        ],
+        "edit_result": "at about 1 megapixel, in about its own shape"
+      }
+    ]
+  },
+  "video": {
+    "models": [
+      {
+        "id": "bytedance/seedance-2.0",
+        "name": "Seedance 2.0",
+        "family": "seedance",
+        "provider": "fal",
+        "status": "active",
+        "image_to_video": "bytedance/seedance-2.0/image-to-video",
+        "text_to_video": "bytedance/seedance-2.0/text-to-video",
+        "start_end": "bytedance/seedance-2.0/image-to-video",
+        "rank": { "image_to_video": 1, "text_to_video": 1, "start_end": 1 },
+        "seconds": [4, 15],
+        "auto_seconds": true,
+        "resolutions": ["480p", "720p", "1080p"],
+        "aspects": ["auto", "21:9", "16:9", "4:3", "1:1", "3:4", "9:16"],
+        "inputs": {
+          "image": "image_url",
+          "end_image": "end_image_url",
+          "duration": "duration",
+          "duration_as": "text",
+          "resolution": "resolution",
+          "aspect": "aspect_ratio",
+          "auto_aspect": "auto",
+          "audio": "generate_audio"
+        },
+        "billing": { "tokens": { "usd_per_1k": 0.014 } },
+        "price": "about $0.30 a second at 720p",
+        "wait": "about 2 to 5 minutes"
+      },
+      {
+        "id": "bytedance/seedance-2.0/mini",
+        "name": "Seedance 2.0 mini",
+        "family": "seedance",
+        "provider": "fal",
+        "status": "active",
+        "image_to_video": "bytedance/seedance-2.0/mini/image-to-video",
+        "text_to_video": null,
+        "start_end": "bytedance/seedance-2.0/mini/image-to-video",
+        "rank": { "image_to_video": 2, "start_end": 2 },
+        "seconds": [4, 15],
+        "auto_seconds": true,
+        "resolutions": ["480p", "720p"],
+        "aspects": ["auto", "21:9", "16:9", "4:3", "1:1", "3:4", "9:16"],
+        "inputs": {
+          "image": "image_url",
+          "end_image": "end_image_url",
+          "duration": "duration",
+          "duration_as": "text",
+          "resolution": "resolution",
+          "aspect": "aspect_ratio",
+          "auto_aspect": "auto",
+          "audio": "generate_audio"
+        },
+        "billing": { "tokens": { "usd_per_1k": 0.007 } },
+        "price": "about $0.07 a second at 480p, $0.15 at 720p",
+        "wait": "about 1 to 3 minutes"
+      },
+      {
+        "id": "alibaba/wan-3.0",
+        "name": "Wan 3.0",
+        "family": "wan",
+        "provider": "fal",
+        "status": "active",
+        "image_to_video": "alibaba/wan-3.0/image-to-video",
+        "text_to_video": "alibaba/wan-3.0/text-to-video",
+        "start_end": "alibaba/wan-3.0/image-to-video",
+        "rank": { "image_to_video": 3, "text_to_video": 2, "start_end": 3 },
+        "seconds": [2, 30],
+        "auto_seconds": true,
+        "resolutions": ["480p", "720p", "1080p"],
+        "aspects": ["auto", "16:9", "4:3", "1:1", "3:4", "9:16"],
+        "inputs": {
+          "image": "start_image_url",
+          "end_image": "end_image_url",
+          "duration": "duration",
+          "duration_as": "number",
+          "resolution": "resolution",
+          "aspect": "aspect_ratio",
+          "auto_aspect": "adaptive",
+          "audio": "audio"
+        },
+        "billing": { "per_second": [["480p", 0.05], ["720p", 0.1], ["1080p", 0.2]] },
+        "price": "$0.05 a second at 480p, $0.10 at 720p, $0.20 at 1080p",
+        "wait": "about 1 to 4 minutes"
+      }
+    ]
+  }
+}
